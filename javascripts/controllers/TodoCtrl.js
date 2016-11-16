@@ -1,11 +1,15 @@
 "use strict";
 
 
-app.controller("TodoCtrl", function($scope){
+app.controller("TodoCtrl", function($scope, ItemFactory){
 	$scope.newTask = {};
 	$scope.welcome = "hey there";
 	$scope.title = "Welcome to your task list Zoe";
 	$scope.showListView = true;
+	$scope.items = [];
+	ItemFactory.getItemList().then(function(fbItems){
+		$scope.items = fbItems;
+	});
 	$scope.newItem = function() {
 		console.log("one item");
 		$scope.showListView = false;
@@ -22,31 +26,5 @@ app.controller("TodoCtrl", function($scope){
 		$scope.newTask = {};
 		$scope.showListView = true;
 	};
-	$scope.items = [
-    { 
-    	id: 0,
-    	task: "Buy soy sauce", 
-    	isCompleted: true,
-    	assignedTo: "Zoe" 
-    },
-    { 
-    	id: 1,
-    	task: "Walk the dogs", 
-    	isCompleted: true,
-    	assignedTo: "Zoe" 
-    },
-    { 
-    	id: 2,
-    	task: "Mow the lawn", 
-    	isCompleted: false,
-    	assignedTo: "Dan" 
-    },
-    { 
-    	id: 3,
-    	task: "Fold laundry", 
-    	isCompleted: false,
-    	assignedTo: "Zoe" 
-    },
-  	];
   	
 });
