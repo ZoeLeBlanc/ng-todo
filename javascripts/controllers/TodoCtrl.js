@@ -10,21 +10,30 @@ app.controller("TodoCtrl", function($scope, ItemFactory){
 	ItemFactory.getItemList().then(function(fbItems){
 		$scope.items = fbItems;
 	});
+	let getItems = function(){
+		ItemFactory.getItemList().then( (fbItems)=>{
+			$scope.items = fbItems;
+		});
+	};
+	getItems();
 	$scope.newItem = function() {
-		console.log("one item");
 		$scope.showListView = false;
 	};
 	$scope.allItems = function(){
-		console.log("all items");
 		$scope.showListView = true;
 	};
 	$scope.addNewItem = function(){
 		$scope.newTask.isCompleted = false;
-		$scope.newTask.id = $scope.items.length;
-		console.log("newTask in function, ", $scope.newTask);
-		$scope.items.push($scope.newTask);
-		$scope.newTask = {};
-		$scope.showListView = true;
+		ItemFactory.postNewItem($scope.newTask).then( (itemId)=>{
+			getItems();
+			$scope.newTask = {};
+			$scope.showListView = true;
+		});
 	};
-  	
+  	$scope.deleteItem = function(itemId){
+  		console.log("delete", itemId);
+  		ItemFactory.deleteItem(itemId).then( (response)=>{
+  			getItems();
+  		});
+  	};
 });
