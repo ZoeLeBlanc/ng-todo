@@ -1,0 +1,24 @@
+{
+	"items":{
+		"item0":{ 
+	    	"task": "Buy soy sauce", 
+	    	"isCompleted": true,
+	    	"assignedTo": "Zoe" 
+    	},
+    	"item1": { 
+	    	"task": "Walk the dogs", 
+	    	"isCompleted": true,
+	    	"assignedTo": "Zoe" 
+    	},
+    	"item2":{ 
+	    	"task": "Mow the lawn", 
+	    	"isCompleted": false,
+	    	"assignedTo": "Dan" 
+    	},
+    	"item3":{ 
+    	"task": "Fold laundry", 
+    	"isCompleted": false,
+    	"assignedTo": "Zoe" 
+   		}
+	}
+}
