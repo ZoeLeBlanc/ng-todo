@@ -1,9 +1,9 @@
 "use strict";
-app.controller("NavCtrl", function($scope){
+app.controller("NavCtrl", function($scope, $location){
 	$scope.navItems = [
 	{
 		name:"Logout", 
-		url:"#/Logout"
+		url:"#/logout"
 	},
 	{
 		name:"All Items", 

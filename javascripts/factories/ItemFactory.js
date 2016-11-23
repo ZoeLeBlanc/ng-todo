@@ -1,8 +1,9 @@
 "use strict";
 app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG){
-	var getItemList = function(){
+	//Firebase: get all Items
+	var getItemList = function(userId){
 		return $q((resolve, reject)=>{
-			$http.get(`${FIREBASE_CONFIG.databaseURL}/items.json`)
+			$http.get(`${FIREBASE_CONFIG.databaseURL}/items.json?orderBy="uid"&equalTo="${userId}"`)
 			 .success( (response)=>{
 			 	let items = [];
 			 	Object.keys(response).forEach((key)=>{
@@ -16,12 +17,14 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG){
 			 });
 		});
 	};
+	//Firebase: send a new item to Firebase
 	var postNewItem = function(newItem){
 		return $q((resolve, reject)=>{
 			$http.post(`${FIREBASE_CONFIG.databaseURL}/items.json`, JSON.stringify({
 				assignedTo: newItem.assignedTo,
 				isCompleted: newItem.isCompleted,
-				task: newItem.task
+				task: newItem.task,
+				uid: newItem.uid
 				})
 			)
 			 .success( (postResponse)=>{
@@ -60,7 +63,8 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG){
 				JSON.stringify({
 					assignedTo: editItem.assignedTo,
 					isCompleted: editItem.isCompleted,
-					task: editItem.task
+					task: editItem.task,
+					uid: editItem.uid
 				})
 			)
 			 .success( (editResponse)=>{
